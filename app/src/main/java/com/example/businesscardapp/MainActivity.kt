@@ -7,9 +7,15 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Call
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -72,9 +78,18 @@ fun DesignationInfo(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ContactInfo(modifier: Modifier = Modifier) {
-    Column(modifier = modifier) {
-
+fun ContactInfoRow(modifier: Modifier = Modifier) {
+    Row(
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier.padding(10.dp)
+    ) {
+        Icon(
+            imageVector = Icons.Rounded.Call,
+            contentDescription = null
+        )
+        Spacer(modifier = Modifier.width(25.dp))
+        Text(text = "+91 (123) 444 555 678")
     }
 }
 
@@ -82,6 +97,6 @@ fun ContactInfo(modifier: Modifier = Modifier) {
 @Composable
 fun BusinessCardPreview() {
     BusinessCardAppTheme {
-        DesignationInfo()
+        ContactInfoRow()
     }
 }
