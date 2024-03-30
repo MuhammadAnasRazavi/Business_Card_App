@@ -25,9 +25,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -44,7 +46,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-
+                    BusinessCard()
                 }
             }
         }
@@ -52,30 +54,33 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun DesignationInfo(modifier: Modifier = Modifier) {
+fun DesignationInfo(image: Painter, name: String, designation: String, modifier: Modifier = Modifier) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
     ) {
         Image(
-            painter = painterResource(id = R.drawable.android_logo),
+            painter = image,
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .height(200.dp)
-                .width(200.dp)
-                .background(Color.DarkGray)
+                .height(135.dp)
+                .width(135.dp)
+                .background(Color(0xFF073042))
         )
         Text(
-            text = "Siddiqui Anas",
+            text = name,
             fontSize = 38.sp,
-            fontWeight = FontWeight.Medium
+            fontWeight = FontWeight.Light,
+            modifier = Modifier.padding(top = 15.dp)
         )
         Text(
-            text = "Android Developer",
+            text = designation,
             fontSize = 20.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            color = Color(0xFF066537),
+            modifier = Modifier.padding(top = 10.dp)
         )
     }
 }
@@ -88,15 +93,15 @@ fun ContactInfo(modifier: Modifier = Modifier) {
     ) {
         ContactInfoRow(
             icon = Icons.Rounded.Call,
-            contactInfo = "+91 (123) 444 555 678"
+            contactInfo = stringResource(R.string.phone_number)
         )
         ContactInfoRow(
             icon = Icons.Rounded.Share,
-            contactInfo = "@MuhammadAnasRazavi"
+            contactInfo = stringResource(R.string.social_media_name)
         )
         ContactInfoRow(
             icon = Icons.Rounded.Email,
-            contactInfo = "muhammadanas@android.com"
+            contactInfo = stringResource(R.string.email_text)
         )
     }
 }
@@ -110,7 +115,8 @@ fun ContactInfoRow(icon: ImageVector, contactInfo: String, modifier: Modifier = 
     ) {
         Icon(
             imageVector = icon,
-            contentDescription = null
+            contentDescription = null,
+            tint = Color(0xFF046a3a)
         )
         Spacer(modifier = Modifier.width(25.dp))
         Text(
@@ -124,9 +130,16 @@ fun BusinessCard(modifier: Modifier = Modifier) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier.fillMaxSize()
+        modifier = modifier
+            .fillMaxSize()
+            .background(Color(0xFFd2e7d4))
     ) {
-        DesignationInfo()
+        Spacer(modifier = Modifier.height(200.dp))
+        DesignationInfo(
+            image = painterResource(id = R.drawable.android_logo),
+            name = stringResource(R.string.developer_name_text),
+            designation = stringResource(R.string.developer_designation)
+        )
         Spacer(modifier = Modifier.height(150.dp))
         ContactInfo()
     }
