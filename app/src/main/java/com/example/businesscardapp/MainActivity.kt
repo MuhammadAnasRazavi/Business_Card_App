@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Call
+import androidx.compose.material.icons.rounded.Email
+import androidx.compose.material.icons.rounded.Share
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -23,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -78,18 +81,54 @@ fun DesignationInfo(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ContactInfoRow(modifier: Modifier = Modifier) {
+fun ContactInfo(modifier: Modifier = Modifier) {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        modifier = modifier
+    ) {
+        ContactInfoRow(
+            icon = Icons.Rounded.Call,
+            contactInfo = "+91 (123) 444 555 678"
+        )
+        ContactInfoRow(
+            icon = Icons.Rounded.Share,
+            contactInfo = "@MuhammadAnasRazavi"
+        )
+        ContactInfoRow(
+            icon = Icons.Rounded.Email,
+            contactInfo = "muhammadanas@android.com"
+        )
+    }
+}
+
+@Composable
+fun ContactInfoRow(icon: ImageVector, contactInfo: String, modifier: Modifier = Modifier) {
     Row(
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier.padding(10.dp)
     ) {
         Icon(
-            imageVector = Icons.Rounded.Call,
+            imageVector = icon,
             contentDescription = null
         )
         Spacer(modifier = Modifier.width(25.dp))
-        Text(text = "+91 (123) 444 555 678")
+        Text(
+            text = contactInfo
+        )
+    }
+}
+
+@Composable
+fun BusinessCard(modifier: Modifier = Modifier) {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier.fillMaxSize()
+    ) {
+        DesignationInfo()
+        Spacer(modifier = Modifier.height(150.dp))
+        ContactInfo()
     }
 }
 
@@ -97,6 +136,6 @@ fun ContactInfoRow(modifier: Modifier = Modifier) {
 @Composable
 fun BusinessCardPreview() {
     BusinessCardAppTheme {
-        ContactInfoRow()
+        BusinessCard()
     }
 }
